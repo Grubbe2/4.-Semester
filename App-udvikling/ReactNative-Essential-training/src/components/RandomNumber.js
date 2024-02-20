@@ -13,11 +13,13 @@ RandomNumber.propTypes = {
 export default function RandomNumber({number, isDisabled, onPress, id}) {
 
     handlePress = () => {
-        onPress(id)
+        if(isDisabled) return;
+        onPress(id);
     }
     return(
-        <TouchableOpacity onPress={handlePress}>
-            <Text style={[styles.random, isDisabled && styles.selected]}>
+        <TouchableOpacity onPress={handlePress}
+            activeOpacity={isDisabled ? 1 : 0.2}>
+            <Text style={[styles.random, isDisabled && styles.disabled]}>
                 {number}
             </Text>
         </TouchableOpacity>
@@ -37,7 +39,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#17c2ec',
         textAlign: 'center',
     },
-    selected:{
+    disabled:{
         opacity: 0.3,
+        
     }
 })
